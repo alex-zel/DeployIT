@@ -1,0 +1,14 @@
+DeployIT 1.0.0
+    Deploys new windows installation automatically to specified partition.
+
+Usage:
+  DeployIT --iso-path: --partition: [--hostname:] [--edition:] [--unattended:]
+
+Options:
+  --iso-path:<path>           Path to windows installation ISO file, or short description of ISO file (i.e. "win 8 x64", configure default path in config/config.txt file)
+  --partition:<name>          Partition name (volume label) to install to
+  --hostname:<hostname>       New hostname for installation, defaults to current hostname
+  --edition:<release name>    Windows edition name, in case multiple edition are present in the same ISO,
+                                if omitted defaults to edition available in ISO, in case of multiple editions, user is prompted for selection
+  --unattended:<path>         Custom unattended file to use (default file is configured in config/config.txt)
+  --help                      Display help

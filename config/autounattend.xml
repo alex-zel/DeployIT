@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+	<settings pass="windowsPE">
+		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <UserData>
+              <AcceptEula>true</AcceptEula>
+              <FullName>Intel</FullName>
+              <Organization>My Corporation</Organization>
+            </UserData>
+            <ImageInstall>
+				<OSImage>
+				  <WillShowUI>Never</WillShowUI>
+				  <InstallTo>
+					<DiskID>diskid</DiskID>
+					<PartitionID>partitionid</PartitionID>
+				  </InstallTo>
+				  <InstallFrom>
+					<MetaData>
+                      <Key>/IMAGE/Name</Key>
+                      <Value>wineditionname</Value>
+					</MetaData>
+				  </InstallFrom>
+				</OSImage>
+			</ImageInstall>
+            <DiskConfiguration>
+              <WillShowUI>Never</WillShowUI>
+              <Disk>
+                <DiskID>diskid</DiskID>
+                <WillWipeDisk>false</WillWipeDisk>
+                <ModifyPartitions>
+                  <ModifyPartition>
+                    <Order>1</Order>
+                    <PartitionID>partitionid</PartitionID>
+                    <Letter>C</Letter>
+                    <Label>OS1</Label>
+                    <Active>true</Active>
+                  </ModifyPartition>
+                </ModifyPartitions>
+              </Disk>
+            </DiskConfiguration>
+			<EnableFirewall>false</EnableFirewall>
+		</component>
+        <component name="Microsoft-Windows-Setup" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <UserData>
+              <AcceptEula>true</AcceptEula>
+              <FullName>User</FullName>
+              <Organization>My Corporation</Organization>
+            </UserData>
+            <ImageInstall>
+				<OSImage>
+				  <WillShowUI>Never</WillShowUI>
+				  <InstallTo>
+					<DiskID>diskid</DiskID>
+					<PartitionID>partitionid</PartitionID>
+				  </InstallTo>
+				  <InstallFrom>
+					<MetaData>
+                      <Key>/IMAGE/Name</Key>
+                      <Value>wineditionname</Value>
+					</MetaData>
+				  </InstallFrom>
+				</OSImage>
+			</ImageInstall>
+            <DiskConfiguration>
+              <WillShowUI>Never</WillShowUI>
+              <Disk>
+                <DiskID>diskid</DiskID>
+                <WillWipeDisk>false</WillWipeDisk>
+                <ModifyPartitions>
+                  <ModifyPartition>
+                    <Order>1</Order>
+                    <PartitionID>partitionid</PartitionID>
+                    <Letter>C</Letter>
+                    <Label>OS1</Label>
+                    <Active>true</Active>
+                  </ModifyPartition>
+                </ModifyPartitions>
+              </Disk>
+            </DiskConfiguration>
+			<EnableFirewall>false</EnableFirewall>
+		</component>
+	</settings>
+	<settings pass="generalize">
+		<component name="Microsoft-Windows-Security-SPP" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<SkipRearm>1</SkipRearm>
+		</component>
+        <component name="Microsoft-Windows-Security-SPP" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<SkipRearm>1</SkipRearm>
+		</component>
+	</settings>
+	<settings pass="specialize">
+		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<ComputerName>newhostname</ComputerName>
+			<RegisteredOrganization>labs</RegisteredOrganization>
+			<RegisteredOwner>user</RegisteredOwner>
+		</component>
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<ComputerName>newhostname</ComputerName>
+			<RegisteredOrganization>labs</RegisteredOrganization>
+			<RegisteredOwner>user</RegisteredOwner>
+		</component>
+		<component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<RunSynchronous>
+                <RunSynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<Description>Switch to the secure desktop when prompting for elevation</Description>
+					<Path>REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v PromptOnSecureDesktop /t reg_DWORD /d 0 /f</Path>
+					<WillReboot>Never</WillReboot>
+				</RunSynchronousCommand>
+			    <RunSynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<Description>Disable EnableInstallerDetection</Description>
+					<Path>reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableInstallerDetection /t reg_DWORD /d 0 /f</Path>
+					<WillReboot>Never</WillReboot>
+			    </RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<Description>Disable open file security warning</Description>
+					<Path>reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v SEE_MASK_NOZONECHECKS /t REG_SZ /d 1 /f</Path>
+					<WillReboot>Never</WillReboot>
+			    </RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<Description>Disable open file security warning</Description>
+					<Path>reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v SaveZoneInformation /t REG_DWORD /d 00000001 /f</Path>
+					<WillReboot>Never</WillReboot>
+			    </RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<Description>Disable open file security warning</Description>
+					<Path>reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Associations" /v LowRiskFileTypes /t REG_SZ /d ".avi;.bat;.com;.cmd;.exe;.htm;.html;.lnk;.mpg;.mpeg;.mov;.mp3;.msi;.m3u;.rar;.reg;.txt;.vbs;.wav;.zip;" /f</Path>
+					<WillReboot>Never</WillReboot>
+				</RunSynchronousCommand>
+			</RunSynchronous>
+		</component>
+        <component name="Microsoft-Windows-Deployment" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<RunSynchronous>
+                <RunSynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<Description>Switch to the secure desktop when prompting for elevation</Description>
+					<Path>REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v PromptOnSecureDesktop /t reg_DWORD /d 0 /f</Path>
+					<WillReboot>Never</WillReboot>
+				</RunSynchronousCommand>
+			    <RunSynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<Description>Disable EnableInstallerDetection</Description>
+					<Path>reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableInstallerDetection /t reg_DWORD /d 0 /f</Path>
+					<WillReboot>Never</WillReboot>
+			    </RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<Description>Disable open file security warning</Description>
+					<Path>reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v SEE_MASK_NOZONECHECKS /t REG_SZ /d 1 /f</Path>
+					<WillReboot>Never</WillReboot>
+			    </RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<Description>Disable open file security warning</Description>
+					<Path>reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v SaveZoneInformation /t REG_DWORD /d 00000001 /f</Path>
+					<WillReboot>Never</WillReboot>
+			    </RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<Description>Disable open file security warning</Description>
+					<Path>reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Associations" /v LowRiskFileTypes /t REG_SZ /d ".avi;.bat;.com;.cmd;.exe;.htm;.html;.lnk;.mpg;.mpeg;.mov;.mp3;.msi;.m3u;.rar;.reg;.txt;.vbs;.wav;.zip;" /f</Path>
+					<WillReboot>Never</WillReboot>
+				</RunSynchronousCommand>
+			</RunSynchronous>
+		</component>
+		<component name="Microsoft-Windows-TerminalServices-LocalSessionManager" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+          <fDenyTSConnections>false</fDenyTSConnections>
+        </component>
+        <component name="Microsoft-Windows-TerminalServices-LocalSessionManager" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+          <fDenyTSConnections>false</fDenyTSConnections>
+        </component>
+		<component name="Networking-MPSSVC-Svc" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DomainProfile_EnableFirewall>false</DomainProfile_EnableFirewall>
+            <PrivateProfile_EnableFirewall>false</PrivateProfile_EnableFirewall>
+            <PublicProfile_EnableFirewall>false</PublicProfile_EnableFirewall>
+        </component>
+        <component name="Networking-MPSSVC-Svc" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DomainProfile_EnableFirewall>false</DomainProfile_EnableFirewall>
+            <PrivateProfile_EnableFirewall>false</PrivateProfile_EnableFirewall>
+            <PublicProfile_EnableFirewall>false</PublicProfile_EnableFirewall>
+        </component>
+		<component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<InputLocale>0409:00000409</InputLocale>
+			<SystemLocale>en-US</SystemLocale>
+			<UILanguage>en-US</UILanguage>
+			<UILanguageFallback>en-US</UILanguageFallback>
+			<UserLocale>en-US</UserLocale>
+		</component>
+        <component name="Microsoft-Windows-International-Core" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<InputLocale>0409:00000409</InputLocale>
+			<SystemLocale>en-US</SystemLocale>
+			<UILanguage>en-US</UILanguage>
+			<UILanguageFallback>en-US</UILanguageFallback>
+			<UserLocale>en-US</UserLocale>
+		</component>
+		<component name="Microsoft-Windows-Security-SPP-UX" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<SkipAutoActivation>true</SkipAutoActivation>
+		</component>
+        <component name="Microsoft-Windows-Security-SPP-UX" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<SkipAutoActivation>true</SkipAutoActivation>
+		</component>
+		<component name="Microsoft-Windows-SQMApi" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<CEIPEnabled>0</CEIPEnabled>
+		</component>
+        <component name="Microsoft-Windows-SQMApi" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<CEIPEnabled>0</CEIPEnabled>
+		</component>
+	</settings>
+	<settings pass="oobeSystem">
+		<component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<InputLocale>1033:00000409</InputLocale>
+			<UILanguage>en-AU</UILanguage>
+			<UserLocale>en-AU</UserLocale>
+		</component>
+        <component name="Microsoft-Windows-International-Core" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<InputLocale>1033:00000409</InputLocale>
+			<UILanguage>en-AU</UILanguage>
+			<UserLocale>en-AU</UserLocale>
+		</component>
+		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<OOBE>
+				<HideEULAPage>true</HideEULAPage>
+				<NetworkLocation>Work</NetworkLocation>
+				<ProtectYourPC>3</ProtectYourPC>
+				<HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+				<SkipMachineOOBE>true</SkipMachineOOBE>
+				<SkipUserOOBE>true</SkipUserOOBE>
+			</OOBE>
+			<TimeZone>Israel Standard Time</TimeZone>
+			<DisableAutoDaylightTimeSet>false</DisableAutoDaylightTimeSet>
+			<UserAccounts>
+				<LocalAccounts>
+					<LocalAccount wcm:action="add">
+						<Description>user</Description>
+						<DisplayName>user</DisplayName>
+						<Group>Administrators</Group>
+						<Name>ccduser</Name>
+                        <Password>
+							<Value>SECRET</Value>
+							<PlainText>true</PlainText>
+						</Password>
+					</LocalAccount>
+					<LocalAccount wcm:action="add">
+						<Description>admin</Description>
+						<DisplayName>admin</DisplayName>
+						<Group>Administrators</Group>
+						<Name>admin</Name>
+                        <Password>
+							<Value>SECRET</Value>
+							<PlainText>true</PlainText>
+						</Password>
+					</LocalAccount>
+				</LocalAccounts>
+			</UserAccounts>
+			<AutoLogon>
+                <Password>
+				    <Value>SECRET</Value>
+                    <PlainText>true</PlainText>
+                </Password>
+                <Enabled>true</Enabled>
+                <LogonCount>9999</LogonCount>
+                <Username>ccduser</Username>
+            </AutoLogon>
+			<FirstLogonCommands>
+				<SynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<Description>Map share</Description>
+					<RequiresUserInput>false</RequiresUserInput>
+					<CommandLine>NET USE X: MY_SHARE /persistent:yes</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<Description>Run finall script</Description>
+					<RequiresUserInput>false</RequiresUserInput>
+					<CommandLine>"X:\WDS\post_wds.bat"</CommandLine>
+				</SynchronousCommand>
+			</FirstLogonCommands>
+		</component>
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<OOBE>
+				<HideEULAPage>true</HideEULAPage>
+				<NetworkLocation>Work</NetworkLocation>
+				<ProtectYourPC>3</ProtectYourPC>
+				<HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+				<SkipMachineOOBE>true</SkipMachineOOBE>
+				<SkipUserOOBE>true</SkipUserOOBE>
+			</OOBE>
+			<TimeZone>Israel Standard Time</TimeZone>
+			<DisableAutoDaylightTimeSet>false</DisableAutoDaylightTimeSet>
+			<UserAccounts>
+				<LocalAccounts>
+					<LocalAccount wcm:action="add">
+						<Description>user</Description>
+						<DisplayName>user</DisplayName>
+						<Group>Administrators</Group>
+						<Name>user</Name>
+                        <Password>
+							<Value>SECRET</Value>
+							<PlainText>true</PlainText>
+						</Password>
+					</LocalAccount>
+					<LocalAccount wcm:action="add">
+						<Description>admin</Description>
+						<DisplayName>admin</DisplayName>
+						<Group>Administrators</Group>
+						<Name>admin</Name>
+                        <Password>
+							<Value>SECRET</Value>
+							<PlainText>true</PlainText>
+						</Password>
+					</LocalAccount>
+				</LocalAccounts>
+			</UserAccounts>
+			<AutoLogon>
+                <Password>
+				    <Value>SECRET</Value>
+                    <PlainText>true</PlainText>
+                </Password>
+                <Enabled>true</Enabled>
+                <LogonCount>9999</LogonCount>
+                <Username>user</Username>
+            </AutoLogon>
+			<FirstLogonCommands>
+				<SynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<Description>Map share</Description>
+					<RequiresUserInput>false</RequiresUserInput>
+					<CommandLine>NET USE X: MY_SHARE /persistent:yes</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<Description>Run finall script</Description>
+					<RequiresUserInput>false</RequiresUserInput>
+					<CommandLine>"X:\WDS\post_wds.bat"</CommandLine>
+				</SynchronousCommand>
+			</FirstLogonCommands>
+		</component>
+		<component name="Microsoft-Windows-ehome-reg-inf" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="NonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<RestartEnabled>true</RestartEnabled>
+		</component>
+        <component name="Microsoft-Windows-ehome-reg-inf" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="NonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<RestartEnabled>true</RestartEnabled>
+		</component>
+	</settings>
+</unattend>
