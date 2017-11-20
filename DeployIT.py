@@ -172,7 +172,7 @@ def iso_mount(iso_path, umount=0):
 def get_partition_index(volume_label):
     """
     Get partition and disk number based on volume label using powershell
-    There is a problem with gow powershell enumerates partitions on basic disks, if there is a primary partition after a logical one,
+    There is a problem with how powershell enumerates partitions on basic disks, if there is a primary partition after a logical one,
     it will be counted as being before the extended partition and will mess up the count, hence we will be enumerating the partitions based on offset (excluding the extended one)
     :param volume_label: partition name string
     :return: partition, disk index as tuple
