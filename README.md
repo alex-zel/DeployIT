@@ -19,6 +19,7 @@ Notes:
 	Microsoft Visual C++ 2010 SP1 Redistributable Package is required for clients to run the program.
 
 Documentation:
+
     --iso-path: Mandatory
         Two options are present, provide full path to ISO installation image, path must not have any spaces (issue with PowerShell command),
         or, write name of windows release based on iso filename, for example say you have an ISO named "en_windows_8_enterprise_x64_dvd_917522.iso",
