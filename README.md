@@ -1,5 +1,7 @@
 DeployIT Ver 1.0.0
+
 Developed by Alex Zeleznikov
+
 This program is built for windows deployment using ISO setup image, for the purpose of automating the installation process.
 
 Build Instructions:
