@@ -5,7 +5,6 @@ This program is built for windows deployment using ISO setup image, for the purp
 Build Instructions:
 
     1.	Install python 3.5
-    
     2.	Install "Microsoft Visual C++ 2010 SP1 Redistributable Package" from either of the links (arch is dependent on python arch you installed)
     
         http://www.microsoft.com/en-us/download/details.aspx?id=8328 - 32 bit
