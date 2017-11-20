@@ -3,8 +3,11 @@ Developed by Alex Zeleznikov
 This program is built for windows deployment using ISO setup image, for the purpose of automating the installation process.
 
 Build Instructions:
+
     1.	Install python 3.5
+    
     2.	Install "Microsoft Visual C++ 2010 SP1 Redistributable Package" from either of the links (arch is dependent on python arch you installed)
+    
         http://www.microsoft.com/en-us/download/details.aspx?id=8328 - 32 bit
         http://www.microsoft.com/en-us/download/details.aspx?id=13523 - 64 bit
     3.	Ensure these commands work in command prompt: python, pip. If the commands do not work, add the following to your PATH environmental variable: C:\Python34  and  C:\Python34\Scripts
